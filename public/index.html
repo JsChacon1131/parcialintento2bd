@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gestión de espacios culturales</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <main class="container">
+    <header><p class="eyebrow">Administración cultural</p><h1>Espacios y reservas</h1><p>Registro y consulta de espacios culturales y solicitudes de uso.</p></header>
+    <div id="message" role="status" aria-live="polite"></div>
+    <div class="grid">
+      <section class="panel">
+        <h2>Nuevo espacio cultural</h2>
+        <form id="spaceForm">
+          <label>Nombre<input name="name" required maxlength="120"></label>
+          <label>Dirección<input name="address" required maxlength="255"></label>
+          <label>Capacidad máxima<input name="maximumCapacity" type="number" min="1" required></label>
+          <label>Estado de conservación<select name="conservationStatus" required><option value="operational">Operativo</option><option value="maintenance">Mantenimiento</option><option value="closed">Cerrado</option></select></label>
+          <label>Dependencia administrativa<select name="administrativeUnitId" id="unitSelect" required></select></label>
+          <button>Registrar espacio</button>
+        </form>
+      </section>
+      <section class="panel">
+        <h2>Solicitud de reserva</h2>
+        <form id="reservationForm">
+          <label>Espacio cultural<select name="spaceId" id="spaceSelect" required></select></label>
+          <label>Organización<select name="organizationId" id="organizationSelect" required></select></label>
+          <label>Aforo solicitado<input name="attendees" type="number" min="1" required></label>
+          <label>Inicio<input name="startAt" type="datetime-local" required></label>
+          <label>Fin<input name="endAt" type="datetime-local" required></label>
+          <button>Enviar solicitud</button>
+        </form>
+      </section>
+      <section class="panel">
+        <h2>Consultar reserva</h2>
+        <form id="searchForm"><label>ID de reserva<input name="reservationId" type="number" min="1" required></label><button>Consultar estado</button></form>
+        <div id="reservationDetail"></div>
+        <h3>Actualizar estado</h3>
+        <form id="statusForm"><label>ID de reserva<input name="reservationId" type="number" min="1" required></label><label>Estado<select name="status"><option value="approved">Aprobada</option><option value="rejected">Rechazada</option><option value="cancelled">Cancelada</option></select></label><button>Actualizar</button></form>
+      </section>
+      <section class="panel"><h2>Espacios registrados</h2><div class="table-wrap"><table><thead><tr><th>ID</th><th>Espacio</th><th>Capacidad</th><th>Estado</th></tr></thead><tbody id="spaceRows"></tbody></table></div></section>
+      <section class="panel wide"><h2>Solicitudes registradas</h2><div class="table-wrap"><table><thead><tr><th>ID</th><th>Espacio</th><th>Organización</th><th>Aforo</th><th>Estado</th></tr></thead><tbody id="reservationRows"></tbody></table></div></section>
+    </div>
+  </main>
+  <script src="/js/app.js" defer></script>
+</body>
+</html>
